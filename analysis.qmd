@@ -1,0 +1,96 @@
+---
+title: "Analyzing School Districts and Americans' Time Use"
+author: "Javier Mercado"
+format: html
+execute:
+  echo: false
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+library(DBI)
+library(duckdb)
+library(dbplyr)
+```
+
+```{r}
+con <- dbConnect(duckdb(), "data/seda_2025.duckdb")
+dbplyr_dist <- tbl(con, "district_scores")
+```
+
+```{r}
+#| cache: true
+#| cache.extra: !expr file.mtime("data/seda_2025.duckdb")
+score_change <- dbplyr_dist |>
+  filter(year == 2015, !is.na(rla_score)) |>
+  select(district_id, district_name, state, rla_2015 = rla_score) |>
+  inner_join(
+    dbplyr_dist |>
+      filter(year == 2023, !is.na(rla_score)) |>
+      select(district_id, rla_2023 = rla_score),
+    by = "district_id"
+  ) |>
+  mutate(rla_change = rla_2023 - rla_2015) |>
+  collect()
+
+dbplyr_state <- tbl(con, "state_scores")
+
+state_change <- dbplyr_state |>
+  filter(year == 2015, !is.na(rla_score)) |>
+  select(stateabb, state_name, rla_2015 = rla_score) |>
+  inner_join(
+    dbplyr_state |>
+      filter(year == 2023, !is.na(rla_score)) |>
+      select(stateabb, rla_2023 = rla_score),
+    by = "stateabb"
+  ) |>
+  mutate(rla_change = rla_2023 - rla_2015) |>
+  collect()
+
+state_change |>
+  arrange(rla_change)
+```
+
+```{r}
+score_change |>
+  collect() |>
+  ggplot(aes(x = rla_change, fill = rla_change > 0)) +
+  geom_histogram(bins = 30, color = "white", show.legend = FALSE) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "red") +
+  labs(
+    title = "Distribution of Reading Score Changes (2015 to 2023)",
+    subtitle = "Across 9,644 school districts with scores in both years",
+    caption = "Source: Stanford Education Data Archive (SEDA 2025)",
+    x = "Change in Reading Score (RLA)",
+    y = "Number of Districts"
+  )
+```
+
+```{r}
+#| fig-height: 8
+state_change |>
+  collect() |>
+  mutate(state_name = fct_reorder(state_name, rla_2023)) |>
+  ggplot(aes(y = state_name)) +
+  geom_segment(
+    aes(x = rla_2015, xend = rla_2023, yend = state_name, color = rla_change > 0),
+    arrow = arrow(length = unit(0.15, "cm"), type = "closed")
+  ) +
+  geom_point(aes(x = rla_2015), color = "gray50", size = 1.5) +
+  labs(
+    title = "State-Level Changes in Reading Scores (2015 to 2023)",
+    subtitle = "States sorted by 2023 score; gray dots indicate 2015 baseline",
+    caption = "Source: Stanford Education Data Archive (SEDA 2025)",
+    x = "Reading Score (RLA)",
+    y = NULL,
+    color = "Improved"
+  )
+```
+
+
+
+
+
+
+
