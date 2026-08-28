@@ -79,31 +79,13 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>duckdb keeps downloaded extensions and secrets in a temporary directory:
-ℹ /tmp/RtmpTGjf4D/duckdb
+ℹ /tmp/Rtmpvch51D/duckdb
 This is removed when the R session ends.
 • Extensions are re-downloaded each session.
 • Secrets are lost.
 ℹ Run duckdb(shared_home = TRUE) (or create ~/.duckdb) to keep them (suitable for most users).
 ℹ Run duckdb(shared_home = FALSE) to accept the temporary directory (and silence this message).
 ℹ See ?duckdb_storage for details and alternatives.</code></pre>
-</div>
-</div>
-<div class="cell" data-cache.extra="&quot;2026-08-27 23:23:07&quot;">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 51 × 5
-   stateabb state_name    rla_2015 rla_2023 rla_change
-   &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
- 1 VT       Vermont         0.294   -0.0775     -0.371
- 2 OK       Oklahoma        0.0470  -0.294      -0.341
- 3 DE       Delaware        0.0755  -0.259      -0.334
- 4 VA       Virginia        0.204   -0.125      -0.330
- 5 ME       Maine           0.143   -0.176      -0.319
- 6 NE       Nebraska        0.189   -0.0989     -0.288
- 7 OR       Oregon          0.0622  -0.221      -0.283
- 8 WV       West Virginia  -0.0639  -0.341      -0.277
- 9 NH       New Hampshire   0.335    0.0671     -0.268
-10 MO       Missouri        0.112   -0.148      -0.260
-# ℹ 41 more rows</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -127,29 +109,13 @@ This is removed when the R session ends.
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>duckdb keeps downloaded extensions and secrets in a temporary directory:
-ℹ /tmp/RtmpTGjf4D/duckdb
+ℹ /tmp/Rtmpvch51D/duckdb
 This is removed when the R session ends.
 • Extensions are re-downloaded each session.
 • Secrets are lost.
 ℹ Run duckdb(shared_home = TRUE) (or create ~/.duckdb) to keep them (suitable for most users).
 ℹ Run duckdb(shared_home = FALSE) to accept the temporary directory (and silence this message).
 ℹ See ?duckdb_storage for details and alternatives.</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 36 × 3
-   sex    major_name                         mean_weekday_minutes
-   &lt;chr&gt;  &lt;chr&gt;                                             &lt;dbl&gt;
- 1 Female Household Activities                              198. 
- 2 Female Eating and Drinking                                69.6
- 3 Female Traveling                                          78.1
- 4 Female Socializing, Relaxing, and Leisure                359. 
- 5 Female Telephone Calls                                    52.8
- 6 Male   Eating and Drinking                                75.2
- 7 Male   Socializing, Relaxing, and Leisure                447. 
- 8 Male   Traveling                                          76.6
- 9 Male   Household Activities                              159. 
-10 Male   Religious and Spiritual Activities                 80.8
-# ℹ 26 more rows</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -159,24 +125,6 @@ This is removed when the R session ends.
 <p><img src="analysis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 144 × 4
-   sex    start_hour major_name                         mean_weekday_minutes
-   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;                                             &lt;dbl&gt;
- 1 Female         23 Personal Care Activities                          252. 
- 2 Male            9 Socializing, Relaxing, and Leisure                122. 
- 3 Male           14 Socializing, Relaxing, and Leisure                128. 
- 4 Female          6 Socializing, Relaxing, and Leisure                 89.6
- 5 Female         11 Eating and Drinking                                33.3
- 6 Female         18 Eating and Drinking                                35.9
- 7 Female         19 Eating and Drinking                                34.7
- 8 Female         19 Socializing, Relaxing, and Leisure                111. 
- 9 Male            8 Personal Care Activities                           47.4
-10 Male           23 Personal Care Activities                          260. 
-# ℹ 134 more rows</code></pre>
 </div>
 </div>
 <div class="cell">

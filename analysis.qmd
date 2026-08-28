@@ -48,8 +48,6 @@ state_change <- dbplyr_state |>
   mutate(rla_change = rla_2023 - rla_2015) |>
   collect()
 
-state_change |>
-  arrange(rla_change)
 ```
 
 ```{r}
@@ -104,7 +102,6 @@ activity_avg <- dbplyr_resp |>
   summarize(mean_weekday_minutes = mean(total_minutes, na.rm = TRUE), .groups = "drop") |>
   collect()
 
-activity_avg
 ```
 
 ```{r}
@@ -144,7 +141,6 @@ hourly_avg <- dbplyr_resp |>
   summarize(mean_weekday_minutes = mean(total_minutes, na.rm = TRUE), .groups = "drop") |>
   collect()
 
-hourly_avg
 ```
 
 ```{r}
